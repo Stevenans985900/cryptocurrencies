@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Kripto Paralar - Coin.web.tr</title>
+	<meta charset="utf-8">
+	<link href="https://fonts.googleapis.com/css?family=Open+Sans|PT+Sans" rel="stylesheet">
+	<link href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.5.3/css/bulma.css" rel="stylesheet">
+	<link href="css/style.css" rel="stylesheet">
+	<style>
+		body{
+			background-color: #ecf1f7;
+		}
+	</style>
+</head>
+<body>
+
+	<section class="section">
+		<div class="container">
+			<h1 class="title">Kripto Paralar</h1>
+			<h2>Bitcoin ve kripto para piyasa değerleri.</h2>
+			<img src="https://i1.wp.com/coin.web.tr/wp-content/uploads/2017/09/logo.png?zoom=2&fit=300%2C67" style="height:50px; float:right; margin-bottom: 10px;">
+
+				<div id="app">
+
+					<table class="table is-fullwidth is-striped table-crypto">
+						<thead>
+							<tr>
+								<th>Sıra</th>
+								<th>Ad</th>
+								<th>Sembol</th>
+								<th>Fiyat (TL)</th>
+								<th>1 Saat</th>
+								<th>1 Gün</th>
+								<th>1 Hafta</th>
+								<th>Piyasa Değeri (TL)</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr v-for="coin in coins">
+								<td>{{ coin.rank }}</td>
+								<td><img v-bind:src="getCoinImage(coin.id)" v-bind:alt="coin.name"> {{ coin.name }}</td>
+								<td>{{ coin.symbol }}</td>
+								<td>{{ coin.price_try | currency('₺') }}</td>
+								<td v-bind:style="getColor(coin.percent_change_1h)"><span v-if="coin.percent_change_1h > 0">+</span>%{{ coin.percent_change_1h }}</td>
+								<td v-bind:style="getColor(coin.percent_change_24h)"><span v-if="coin.percent_change_24h > 0">+</span>%{{ coin.percent_change_24h }}</td>
+								<td v-bind:style="getColor(coin.percent_change_7d)"><span v-if="coin.percent_change_7d > 0">+</span>%{{ coin.percent_change_7d }}</td>
+								<td>{{ coin.market_cap_try | currency('₺') }}</td>
+							</tr>
+						</tbody>
+					</table>
+
+				</div>
+
+		</div>
+	</section>
+
+	<!-- Please don't remove. Thanks -->
+	<a href="http://coin.web.tr" title="Bitcoin" style="font-size:10px; color:#ccc;">Bitcoin</a>
+
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.4.4/vue.js"></script>  
+	<script src="https://cdn.jsdelivr.net/npm/vue2-filters/dist/vue2-filters.min.js"></script>  
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>  
+	<script type="text/javascript" src="js/app.js"></script>  
+</body>
+</html>
